@@ -7,7 +7,11 @@ const app = express();
 const port = 3001;
 
 // This is where you'll put your secret API key from Google AI Studio
-const genAI = new GoogleGenerativeAI("AIzaSyDOUx34WfUgs-PjQh4UK6ifQet0PKZeCDc"); // IMPORTANT: Replace with your key
+const googleApiKey = process.env.GOOGLE_API_KEY;
+if (!googleApiKey) {
+  throw new Error("GOOGLE_API_KEY environment variable is not set.");
+}
+const genAI = new GoogleGenerativeAI(googleApiKey); // IMPORTANT: Replace with your key
 
 // ----- MIDDLEWARE -----
 app.use(cors());
